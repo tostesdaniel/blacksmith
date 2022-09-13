@@ -8,4 +8,9 @@ export default {
 
     return res.status(201).json(product);
   },
+  getAll: async (req: Request, res: Response): Promise<Response> => {
+    const products = await Products.getAll();
+
+    return res.status(200).json(products);
+  },
 };
