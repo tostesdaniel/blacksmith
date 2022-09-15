@@ -18,7 +18,6 @@ export default {
     const user = req.body as IUser;
     const response = await User.login(user);
     if (response instanceof ValidationError) return next(response);
-    console.log(response instanceof ValidationError);
     if (response instanceof Error) return next(response);
 
     return res.status(200).json(response);
