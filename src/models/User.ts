@@ -1,5 +1,5 @@
 import { ResultSetHeader } from 'mysql2/promise';
-import User from '../interfaces/User';
+import User, { UserPacket } from '../interfaces/User';
 import connection from './connection';
 
 export default {
@@ -10,5 +10,13 @@ export default {
     const [{ insertId }] = await connection.execute<ResultSetHeader>(query, values);
 
     return insertId;
+  },
+  login: async ({ username, password }: User): Promise<User> => {
+    const query = `SELECT id, username, classe, level, password 
+      FROM Trybesmith.Users WHERE username=? AND password=?`;
+    const values = [username, password];
+    const [[user]] = await connection.execute<UserPacket[]>(query, values);
+
+    return user;
   },
 };
