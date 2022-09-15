@@ -10,6 +10,6 @@ const secretKey = process.env.JWT_SECRET || 'notRagnarLothbrok';
 export default async ({ id, username }: User): Promise<JwtToken> => {
   const payload = { id, username };
   const options: SignOptions = { algorithm: 'HS256' };
-  const token = jwt.sign({ data: payload }, secretKey, options);
+  const token = jwt.sign(payload, secretKey, options);
   return { token };
 };
